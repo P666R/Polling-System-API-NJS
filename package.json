@@ -1,0 +1,27 @@
+{
+  "name": "polling-system-api",
+  "version": "1.0.0",
+  "description": "api based polling system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P666R/Polling-System-API-NJS.git"
+  },
+  "keywords": [
+    "api",
+    "polling system"
+  ],
+  "author": "PRoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/P666R/Polling-System-API-NJS/issues"
+  },
+  "homepage": "https://github.com/P666R/Polling-System-API-NJS#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.1.0"
+  }
+}
