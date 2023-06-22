@@ -3,7 +3,7 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getQuestion = catchAsync(async (req, res, next) => {
-  const question = await Question.findById(req.params.id);
+  const question = await Question.findById(req.params.id).populate('options');
 
   if (!question) {
     return next(new AppError('No question found with this id!', 404));

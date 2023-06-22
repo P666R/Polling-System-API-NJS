@@ -4,7 +4,7 @@ const optionRoutes = require('./optionRoutes');
 
 const router = express.Router();
 
-router.route('/:id/options', optionRoutes);
+router.use('/:id/options', optionRoutes);
 
 router.route('/create').post(questionController.createQuestion);
 router.route('/:id').get(questionController.getQuestion);

@@ -9,8 +9,16 @@ const questionSchema = new mongoose.Schema(
   },
   {
     strictQuery: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+questionSchema.virtual('options', {
+  ref: 'Option',
+  foreignField: 'question',
+  localField: '_id',
+});
 
 const Question = mongoose.model('Question', questionSchema);
 
