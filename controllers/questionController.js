@@ -45,6 +45,8 @@ exports.deleteQuestion = catchAsync(async (req, res, next) => {
     );
   }
 
+  await Question.deleteOne({ _id: req.params.id });
+
   res.status(204).json({
     status: 'success',
     data: null,
