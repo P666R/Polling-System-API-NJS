@@ -23,7 +23,15 @@ exports.getOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body);
+    let doc;
+    if (nameModel(Model) === 'option') {
+      doc = new Model({ question: req.params.id, text: req.body.text });
+      doc._req = req;
+    } else {
+      doc = new Model(req.body);
+    }
+
+    await doc.save();
 
     res.status(201).json({
       status: 'success',
@@ -46,5 +54,23 @@ exports.deleteOne = (Model) =>
     res.status(204).json({
       status: 'success',
       data: null,
+    });
+  });
+
+exports.addVote = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.findByIdAndUpdate(
+      req.params.id,
+      {
+        $inc: { vote: 1 },
+      },
+      { new: true, runValidators: true }
+    );
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        [nameModel(Model)]: doc,
+      },
     });
   });

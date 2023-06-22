@@ -23,7 +23,6 @@ questionSchema.virtual('options', {
 
 questionSchema.pre('findOneAndDelete', async function (next) {
   const doc = await this.model.findOne(this.getQuery()).populate('options');
-
   if (
     doc.options.reduce((acc, option) => {
       return acc + option.vote;
