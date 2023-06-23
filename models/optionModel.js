@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const AppError = require('../utils/appError');
 
+// Define a new Mongoose schema for options
 const optionSchema = new mongoose.Schema(
   {
     text: {
@@ -22,13 +22,8 @@ const optionSchema = new mongoose.Schema(
   }
 );
 
-optionSchema.pre('save', function (next) {
-  this.link_to_vote = `${this._req.protocol}://${this._req.get(
-    'host'
-  )}/api/v1/options/${this._id}/add_vote`;
-  next();
-});
-
+// Create a new Mongoose model for options based on the optionSchema
 const Option = mongoose.model('Option', optionSchema);
 
+// Export the Option model for use in other files
 module.exports = Option;

@@ -26,8 +26,13 @@ exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     let doc;
     if (nameModel(Model) === 'option') {
-      doc = new Model({ question: req.params.id, text: req.body.text });
-      doc._req = req;
+      doc = new Model({
+        question: req.params.id,
+        text: req.body.text,
+        link_to_vote: `${req.protocol}://${req.get('host')}/api/v1/options/${
+          doc._id
+        }/add_vote`,
+      });
     } else {
       doc = new Model(req.body);
     }
@@ -77,18 +82,12 @@ exports.deleteOne = (Model) =>
 
 exports.addVote = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndUpdate(
-      req.params.id,
-      {
-        $inc: { vote: 1 },
-      },
-      { new: true, runValidators: true }
-    );
+    const update = { $inc: { vote: 1 } };
+    const options = { new: true, runValidators: true };
+    const doc = await Option.findByIdAndUpdate(req.params.id, update, options);
 
     res.status(201).json({
       status: 'success',
-      data: {
-        [nameModel(Model)]: doc,
-      },
+      data: { [nameModel(Model)]: doc },
     });
   });
