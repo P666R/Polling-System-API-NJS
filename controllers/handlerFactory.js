@@ -38,10 +38,10 @@ exports.createOne = (Model) =>
       doc = new Model({
         question: req.params.id,
         text: req.body.text,
-        link_to_vote: `${req.protocol}://${req.get('host')}/api/v1/options/${
-          doc._id
-        }/add_vote`,
       });
+      doc.link_to_vote = `${req.protocol}://${req.get('host')}/api/v1/options/${
+        doc._id
+      }/add_vote`;
     } else {
       doc = new Model(req.body);
     }
@@ -66,6 +66,7 @@ exports.deleteOne = (Model) =>
       nameModel(Model) === 'question'
         ? await Option.exists({ question: req.params.id, vote: { $gt: 0 } })
         : await Option.exists({ vote: { $gt: 0 } });
+
     if (hasOptionsWithVotes) {
       const errorMessage =
         nameModel(Model) === 'question'
