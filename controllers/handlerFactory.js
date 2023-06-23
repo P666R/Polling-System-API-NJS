@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const Option = require('../models/optionModel');
 
 const nameModel = (Model) => Model.modelName.toLowerCase();
 
@@ -43,6 +44,23 @@ exports.createOne = (Model) =>
 
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    const hasOptionsWithVotes =
+      nameModel(Model) === 'question'
+        ? await Option.exists({ question: req.params.id, vote: { $gt: 0 } })
+        : await Option.exists({ vote: { $gt: 0 } });
+
+    if (hasOptionsWithVotes) {
+      const errorMessage =
+        nameModel(Model) === 'question'
+          ? `Cannot delete ${nameModel(Model)} whose options have votes!`
+          : `Cannot delete ${nameModel(Model)} with votes!`;
+      return next(new AppError(errorMessage, 400));
+    }
+
+    if (nameModel(Model) === 'question') {
+      await Option.deleteMany({ question: req.params.id });
+    }
+
     const doc = await Model.findByIdAndDelete(req.params.id);
 
     if (!doc) {
