@@ -9,16 +9,22 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
+// Load environment variables from config file
 dotenv.config({ path: './config.env' });
+
+// Import the main application
 const app = require('./app');
 
+// Construct the database connection string
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
 
+// Set the port number for the server
 const port = process.env.PORT || 3000;
 
+// Start the server and connect to the database
 const start = async () => {
   try {
     // Connect to the database
@@ -41,4 +47,5 @@ process.on('unhandledRejection', (err) => {
   server.close(() => process.exit(1));
 });
 
+// Start the server
 start();
