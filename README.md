@@ -31,8 +31,6 @@ This is a backend api for creating questions and adding options to a specific qu
 </div>
 </div>
 
-<hr/>
-
 # <div align="center">
 
 ## Polling system Features
@@ -83,15 +81,17 @@ This is a backend api for creating questions and adding options to a specific qu
   - 📄 [package.json](package.json)
   - 📄 [server.js](server.js)
 
+<hr/>
+
 # Installation And Usage:
 
 ## To run this project run
 
-- git clone https://github.com/P666R/E-commerce-React.git
+- git clone https://github.com/P666R/Polling-System-API-NJS.git
 
 ## Go to directory
 
-- cd e-commerce-react-main
+- cd Polling-System-API-NJS
 
 ## Install all dependencies
 
