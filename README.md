@@ -26,7 +26,7 @@ This is a backend api for creating questions and adding options to a specific qu
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fa6cc23e-b705-4b2d-b4d0-32171e3c8b85/deploy-status)](https://app.netlify.com/sites/e-commerce-react-p666r/deploys)
 
-## Hosted Link: https://e-commerce-react-p666r.netlify.app/
+## Hosted Link:
 
 </div>
 </div>
