@@ -1,5 +1,6 @@
 // Importing necessary packages and modules
 const express = require('express');
+const morgan = require('morgan');
 const questionRouter = require('./routes/questionRoutes');
 const optionRouter = require('./routes/optionRoutes');
 const AppError = require('./utils/appError');
@@ -7,6 +8,10 @@ const globalErrorHandler = require('./controllers/errorController');
 
 // Creating an instance of the express application
 const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Parsing incoming JSON data
 app.use(express.json());

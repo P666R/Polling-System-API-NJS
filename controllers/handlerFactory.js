@@ -4,11 +4,7 @@ const Option = require('../models/optionModel');
 
 const nameModel = (Model) => Model.modelName.toLowerCase();
 
-/**
- * Middleware that gets a document by ID and populates its options field.
- * @param {Object} Model - a Mongoose model
- * @returns {Function} - an Express middleware function
- */
+// Middleware that gets a document by ID and populates its options field
 exports.getOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id).populate('options');
@@ -25,12 +21,7 @@ exports.getOne = (Model) =>
     });
   });
 
-/**
- * Middleware that creates a new document.
- * If the model is an Option, it also creates a link_to_vote field based on the document ID
- * @param {Object} Model - a Mongoose model
- * @returns {Function} - an Express middleware function
- */
+//  Middleware that creates a new document. If the model is an Option, it also creates a link_to_vote field based on the document ID
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     let doc;
@@ -54,12 +45,7 @@ exports.createOne = (Model) =>
     });
   });
 
-/**
- * Middleware that deletes a document by ID.
- * If the model is a Question, it also deletes all associated options if no votes.
- * @param {Object} Model - a Mongoose model
- * @returns {Function} - an Express middleware function
- */
+//  Middleware that deletes a document by ID. If the model is a Question, it also deletes all associated options if no votes
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const hasOptionsWithVotes =
@@ -90,11 +76,7 @@ exports.deleteOne = (Model) =>
     });
   });
 
-/**
- * Middleware that increments the vote count of an option by 1.
- * @param {Object} Model - a Mongoose model
- * @returns {Function} - an Express middleware function
- */
+//  Middleware that increments the vote count of an option by 1
 exports.addVote = (Model) =>
   catchAsync(async (req, res, next) => {
     const update = {

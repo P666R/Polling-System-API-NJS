@@ -1,10 +1,6 @@
 const AppError = require('../utils/appError');
 
-/**
- * Sends detailed error response in development mode
- * @param {Object} err - The error object
- * @param {Object} res - The response object
- */
+// Sends detailed error response in development mode
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -14,11 +10,7 @@ const sendErrorDev = (err, res) => {
   });
 };
 
-/**
- * Sends simplified error response in production mode
- * @param {Object} err - The error object
- * @param {Object} res - The response object
- */
+//  Sends simplified error response in production mode
 const sendErrorProd = (err, res) => {
   if (err.isOperational) {
     res.status(err.statusCode).json({
@@ -34,13 +26,7 @@ const sendErrorProd = (err, res) => {
   }
 };
 
-/**
- * Error handling middleware
- * @param {Object} err - The error object
- * @param {Object} req - The request object
- * @param {Object} res - The response object
- * @param {Function} next - The next function
- */
+//  Error handling middleware
 module.exports = (err, req, res, next) => {
   // Set default error status code and status message
   err.statusCode = err.statusCode || 500;

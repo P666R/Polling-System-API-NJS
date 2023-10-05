@@ -1,15 +1,5 @@
-/**
- * Custom error class for application errors
- * @class
- * @extends Error
- */
+//  Custom error class for application errors
 class AppError extends Error {
-  /**
-   * Constructor for AppError
-   * @constructor
-   * @param {string} message - Error message
-   * @param {number} statusCode - HTTP status code for the error
-   */
   constructor(message, statusCode) {
     super(message);
     this.statusCode = statusCode;

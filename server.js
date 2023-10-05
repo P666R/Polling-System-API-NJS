@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception! 💥 Shutting down...');
   console.error(err.name, err.message);
-  // exit the process
   process.exit(1);
 });
 
@@ -24,28 +23,36 @@ const DB = process.env.DATABASE.replace(
 // Set the port number for the server
 const port = process.env.PORT || 3000;
 
-// Start the server and connect to the database
-const start = async () => {
+// Connect to the database and start the server
+const connectAndStartServer = async () => {
   try {
-    // Connect to the database
     await mongoose.connect(DB);
     console.log('Database connection successful');
-
-    // Start the server
-    app.listen(port, () => console.log(`App running on port ${port}...`));
-  } catch ({ name, message }) {
-    // Handle connection errors
-    console.log(name, message);
+  } catch (err) {
+    console.log(err.name, err.message);
   }
+
+  // Start the server after successful database connection
+  const server = app.listen(port, () => {
+    console.log(`App running on port ${port}...`);
+  });
+
+  // Handle unhandled promise rejections
+  const handleRejection = (err) => {
+    console.log('Unhandled Rejection! 💥 Shutting down...');
+    console.log(err.name, err.message);
+    server.close(() => process.exit(1));
+  };
+
+  process.on('unhandledRejection', handleRejection);
+
+  process.on('SIGTERM', () => {
+    console.log('SIGTERM RECEIVED. Shutting down gracefully...');
+    server.close(() => {
+      console.log('Process terminated 💥');
+    });
+  });
 };
 
-// Handle unhandled rejections
-process.on('unhandledRejection', (err) => {
-  console.log('Unhandled Rejection! 💥 Shutting down...');
-  console.log(err.name, err.message);
-  // Close the server and exit the process
-  server.close(() => process.exit(1));
-});
-
 // Start the server
-start();
+connectAndStartServer();
