@@ -6,7 +6,7 @@ This is a backend api for creating questions and adding options to a specific qu
 
 </div>
 
-# Tech Stack Used:
+## Tech Stack Used:
 
 ### 1. NodeJS
 
@@ -19,15 +19,6 @@ This is a backend api for creating questions and adding options to a specific qu
 # Tools:
 
 ### 1. Postman
-
-# <div align="center">
-
-## Hosted Link: https://polling-g03h.onrender.com
-
-## Postman Documentation:
-
-</div>
-</div>
 
 # <div align="center">
 

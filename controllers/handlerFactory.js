@@ -51,7 +51,7 @@ exports.deleteOne = (Model) =>
     const hasOptionsWithVotes =
       nameModel(Model) === 'question'
         ? await Option.exists({ question: req.params.id, vote: { $gt: 0 } })
-        : await Option.exists({ vote: { $gt: 0 } });
+        : await Option.exists({ _id: req.params.id, vote: { $gt: 0 } });
 
     if (hasOptionsWithVotes) {
       const errorMessage =
