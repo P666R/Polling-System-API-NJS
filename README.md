@@ -1,26 +1,8 @@
-# <div align="center">Polling-System-API
+# Polling-System-API
 
-## <div align="center" >Submitted as part of an assignment</div>
+## Submitted as part of an assignment
 
 This is a backend api for creating questions and adding options to a specific question. Options can be voted. Questions, options can be deleted and questions can be viewed with all of their options
-
-</div>
-
-## Tech Stack Used:
-
-### 1. NodeJS
-
-### 2. ExpressJS
-
-### 3. MongoDB
-
-### 4. Mongoose ODM
-
-# Tools:
-
-### 1. Postman
-
-# <div align="center">
 
 ## Polling system Features
 
@@ -41,10 +23,6 @@ This is a backend api for creating questions and adding options to a specific qu
 | DELETE     | /options/:id/delete           | To delete an option                   |
 | PATCH      | /options/:id/add_vote         | To increase the count of votes        |
 | GET        | /questions/:id                | To view a question and its options    |
-
-</div>
-
-</hr>
 
 # Folder Structure:
 
@@ -70,24 +48,22 @@ This is a backend api for creating questions and adding options to a specific qu
   - 📄 [package.json](package.json)
   - 📄 [server.js](server.js)
 
-<hr/>
+## Installation And Usage:
 
-# Installation And Usage:
-
-## To run this project run
+To run this project run
 
 - git clone https://github.com/P666R/Polling-System-API-NJS.git
 
-## Go to directory
+Go to directory
 
 - cd Polling-System-API-NJS
 
-## Install all dependencies
+Install all dependencies
 
 - npm install to install all the dependencies
 - Create an .env file in your project root folder and add your variables
 
-## Run Project
+Run Project
 
 - run npm start
 - Connect to the API using Postman on port 8000
